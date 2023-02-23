@@ -1,0 +1,84 @@
+---
+title: "Spotify top 100 veri analizi"
+author: "Buse Yılmaz"
+date: "2023-02-23"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(dplyr)
+getwd()
+spotify<-read.csv("spotify.csv")
+View(spotify)
+
+```
+##Verimizi tanıyalım
+```{r}
+summary(spotify)
+head(spotify,n = 10)
+```
+##Sürelerine göre şarkıların sıralanması 
+```{r}
+es<-spotify%>%
+  group_by("Şarkı Süresi"=engineSize)%>%
+  summarize(Frekans=n())%>%
+  View()
+es
+```
+##Şarkıların Desibel Frekansı
+```{r}
+frq<-spotify%>%
+  group_by(desibel)%>%
+  summarize(freq=n())%>%
+  View()
+frq
+```
+##En çok dinlenen şarkıların ortalama enerjisi
+```{r}
+ort<-spotify%>%
+  group_by(enerji)%>%
+  summarize("Şarkıların Enerji Ortalaması"=mean(price))%>%
+  View()
+ort
+```
+##Şarkı süresine göre işlemler
+```{r}
+max(spotify$duration)
+min(spotify$duration)
+```
+##Şarkı enerjilerine göre işlemler
+```{r}
+max(spotify$energy)
+min(spotify$energy)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
